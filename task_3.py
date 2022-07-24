@@ -1,4 +1,22 @@
+class NoString(Exception):
 
+    def __init__(self, text):
+        self.text = text
 
-finish_list = [el for el in range(20,241) if el % 20 == 0 or el % 21 ==0]
-print(finish_list)
+def validate(new):
+    try:
+        return int(new)
+    except Exception:
+        return 1
+
+numlist = []
+new = 0
+while new != 'stop':
+    new = input('введите число, если хотите завершить ввод наберите stop ')
+    mistake = NoString(validate(new))
+    if mistake.text == 1:
+        print('введено не число, прошу повторить')
+    else:
+        numlist.append(int(new))
+
+print(numlist)

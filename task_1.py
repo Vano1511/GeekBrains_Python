@@ -1,23 +1,28 @@
-def sallary(hours,stake,bonus):
-    return hours*stake+bonus
+class Data:
 
+    def __init__(self, data):
+        self.data = data
 
-hours = [] # создаем пустые списки данных для сохранения информации(если вдруг потребуются)
-stake = []
-bonus = []
-sallary_dict = {} # создаем пустой словарь для записи выходных данных
-names = input('введите имена сотрудников через пробел : ').split()
+    def data_num(self):
+        self.numbers = self.data.split('-')
+        self.numlist = [int(el) for el in self.numbers]
+        return self.numlist
 
-for i in range(len(names)):
-    name = names[i] # переменная для удобства записи
-    hours.append(int(input(f'введите отработанные часы для работника {name} ')))
-    stake.append(int(input(f'введите чсовую ствку для работника {name} ')))
-    bonus.append(int(input(f'введите премию для работника {name} ')))
-    sallary_dict[name] = sallary(hours[i],stake[i],bonus[i])
+    def valid_data(self, list):
+        if list[0] in range(1, 32):
+            if list[1] in range(1,13):
+                if list[2] in range (0, 2022):
+                    return 'дата введена корректно'
+                else:
+                    return 'введен некорректно год'
+            else:
+                return 'введен некорректно месяц'
+        else:
+            return 'число введено некорректно'
 
+data = input('введите дату в формате дд-мм-гггг : ')
 
-print(sallary_dict)
+day = Data(data)
 
-#print(hours)
-#print(stake)
-#print(bonus)
+print(day.valid_data(day.data_num()))
+print(day.data_num())
