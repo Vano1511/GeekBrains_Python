@@ -1,8 +1,18 @@
-from random import randrange
+class DivByZero(Exception):
+    def __init__(self, text):
+        self.text = text
 
-count = int(input('введите количество элементов в списке : '))
-first_list = [randrange(500) for el in  range(count)]
-print(first_list)
+def division(first, second):
+    if second == 0:
+        raise DivByZero('Деление на ноль является невозможным')
+    else:
+        return f'число {first} делим на {second} равно {round(first / second, 4)}'
 
-finish_list = [first_list[i] for i in range(count) if first_list[i] > first_list[i-1]]
-print(finish_list)
+first = int(input('введите число, которое будем делить : '))
+second = int(input('введите число, на которое будем делить : '))
+
+try:
+    result = division(first, second)
+except DivByZero as e:
+    print(e.text)
+
